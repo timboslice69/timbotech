@@ -21,6 +21,10 @@ Site.add({
         type: Types.CloudinaryImageExpress,
         label: 'Site Logo',
     },
+    introduction: {
+        type: Types.Markdown,
+        label: 'Introduction',
+    },
     copyright: {
         type: Types.Text,
         label: 'Copyright notice'

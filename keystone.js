@@ -12,6 +12,7 @@ var keystone = require('keystone'),
 var customTypes = require('./custom-types/register-custom-type');
 customTypes.register('CloudinaryImageExpress', 'custom-types/cloudinaryimageexpress', keystone);
 customTypes.register('CloudinaryImagesExpress', 'custom-types/cloudinaryimagesexpress', keystone);
+customTypes.register('CloudinaryVideo', 'custom-types/cloudinaryvideo', keystone);
 
 keystone.init({
 	'name': 'Timbo Slice - Creative Technology',
