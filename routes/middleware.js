@@ -56,11 +56,13 @@ exports.initLocals = function (req, res, next) {
         title: undefined,
         url: undefined
     };
+    // Add meta object
+    if (!locals.meta) locals.meta = {};
     // Get global site config
     Site.model.find().limit(1).exec(function (error, result) {
         if (!error && result && result.length > 0) {
             locals.site = result[0];
-            locals.title = locals.site.name;
+            locals.meta.title = locals.site.name;
             locals.meta.description = locals.site.seo.description;
             locals.meta.addKeywords(locals.site.seo.keywords);
         }

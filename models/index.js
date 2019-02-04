@@ -1,2 +1,2 @@
-require('./site.js');
+require('./sites.js');
 require('./users.js');
