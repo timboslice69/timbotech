@@ -1,0 +1,31 @@
+{
+  "name": "my-site",
+  "version": "0.0.0",
+  "private": true,
+  "dependencies": {
+    "connect-mongo": "^2.0.1",
+    "dotenv": "^6.0.0",
+    "express-cache-headers": "^0.1.4",
+    "express-handlebars": "^3.0.0",
+    "express-uglify": "^0.3.1",
+    "keystone": "^4.0.0",
+    "postcss-cli": "^6.1.1",
+    "postcss-import": "^12.0.1",
+    "postcss-middleware": "^1.1.4",
+    "postcss-url": "^8.0.0",
+    "uglify-js": "^3.4.9",
+    "underscore": "^1.9.1",
+    "watch-cli": "^0.2.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node keystone.js --scripts-prepend-node-path",
+    "compilecss": "node_modules/.bin/postcss style/site.css -d public --map --base --verbose",
+    "compilejs": "node_modules/.bin/uglifyjs --config-file uglify.config.json --output public/site.min.js -- js/site.js",
+    "compile": "npm run compilecss && npm run compilejs",
+    "watchcss": "node_modules/.bin/watch -p style/**/*.css -c \"npm run compilecss\"",
+    "watchjs": "node_modules/.bin/watch -p js/*.js -c \"npm run compilejs\"",
+    "nodemon": "nodemon --config nodemon.json",
+    "watch": "npm run watchjs & npm run watchcss & npm run nodemon"
+  }
+}

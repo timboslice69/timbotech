@@ -1,0 +1,8 @@
+@import "global.css";
+@import "parameters.css";
+@import "fonts.css";
+
+@import "partials/site-header.css";
+@import "partials/site-footer.css";
+
+@import "views/index.css";

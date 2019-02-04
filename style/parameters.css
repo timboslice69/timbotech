@@ -1,0 +1,48 @@
+:root {
+    --font-family-default: 'Helvetica', sans-serif;
+    --font-size-heading-one: 36px;
+    --font-size-heading-two: 24px;
+    --font-size-heading-three: 20px;
+    --font-size-link: 16px;
+
+    --color-weak: rgb(100,100,100);
+    --color-normal: rgb(50,50,50);
+    --color-strong: rgb(0,0,0);
+
+    --color-background: rgb(255,255,255);
+    --color-photo-background: rgb(245,245,245);
+
+    --font-size-large: 23px;
+    --font-size-normal: 18px;
+    --font-size-small: 12px;
+
+    --color-background-normal: rgba(255,255,255,1);
+    --color-background-highlight: rgba(185,185,185,1);
+
+    --color-text-normal: rgba(45,45,45,1);
+    --color-text-highlight: rgba(13,13,13,1);
+    --color-text-warning: rgba(200,75,75,1);
+
+    --color-link-normal: rgba(33,67,207,1);
+
+    --text-shadow-default: 0 1px 0px rgba(0,0,0,.5);
+    --text-shadow-light: 0 1px 0px rgba(0,0,0,.35);
+
+    --box-shadow-upper: 0 -2px 2px rgba(0,0,0,.05);
+}
+
+
+/* large screens */
+@media screen and (min-width: 1440px) {
+
+}
+
+/* medium screens*/
+@media screen and (orientation: portrait) and (max-width: 768px) {
+
+}
+
+/* mobile screens */
+@media screen and (max-width: 520px), (orientation: landscape) and (max-width: 812px) {
+
+}

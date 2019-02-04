@@ -1,0 +1,34 @@
+<head>
+    <title>{{meta.title}}</title>
+
+    <meta charset="UTF-8">
+    <meta name="description" content="{{meta.description}}">
+    <meta name="keywords" content="{{{commaSeparated meta.keywords}}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" sizes="any" mask="" href="/favicon.svg">
+    <link rel="canonical" href="{{site.seo.host}}{{permalink}}" />
+
+    <meta property="og:site_name" content="{{site.name_cn}} {{site.name_en}}"/>
+    <meta property="og:title" content="{{meta.title}}"/>
+    <meta property="og:description" content="{{meta.description}}"/>
+    <meta property="og:image" content="{{meta.image.url}}"/>
+    <meta property="og:image:height" content="{{meta.image.height}}"/>
+    <meta property="og:image:width" content="{{meta.image.width}}"/>
+
+    <link rel="stylesheet" type="text/css" href="site.css" media="screen">
+
+    {{#each head.stylesheets}}
+        <link rel="stylesheet" type="text/css" href="{{this}}">
+    {{/each}}
+
+    {{> @partial-block }}
+
+    <script src="site.min.js" type="application/javascript"></script>
+
+    {{#each head.scripts}}
+        <script src="{{this}}" type="text/javascript"></script>
+    {{/each}}
+
+</head>

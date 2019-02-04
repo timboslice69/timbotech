@@ -1,0 +1,6 @@
+{
+  "compress": true,
+  "mangle": true,
+  "ie8": false,
+  "warnings": true
+}

@@ -1,0 +1,48 @@
+body {
+    font-family: var(--font-family-default);
+    font-size: var(--font-size-normal);
+    color: var(--color-normal);
+}
+
+h1 {
+    font-size: var(--font-size-heading-one);
+    color: var(--color-strong);
+}
+
+h2 {
+    font-size: var(--font-size-heading-two);
+    color: var(--color-strong);
+}
+
+h3 {
+    font-size: var(--font-size-heading-three);
+}
+
+h1 a, h2 a, h3 a {
+    font-size: inherit;
+}
+
+h1 a,
+h1 a:link,
+h1 a:active,
+h1 a:visited {
+    font-size: var(--font-size-heading-one);
+    color: inherit;
+}
+
+h2 a,
+h2 a:link,
+h2 a:active,
+h2 a:visited {
+    font-size: inherit;
+    color: inherit;
+}
+
+a {
+    font-size: var(--font-size-link);
+}
+
+p {
+    font-size: var(--font-size-normal);
+}
+
