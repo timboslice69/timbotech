@@ -1,5 +1,5 @@
 var path = require('path');
-var fs = require('fs');
+var fs = require('fs-extra');
 
 const { COPYFILE_FICLONE } = fs.constants;
 
@@ -37,22 +37,25 @@ module.exports = {
             fs.mkdirSync(customKeystonePath);
         }
 
-        //loop through files and copy
-        var files = fs.readdirSync(fullPath);
+        // copy entire directory
+        fs.copySync(fullPath, customKeystonePath);
 
-        // get files to copy
-        for (var from, to, data, suffix, filename, i = 0; i < files.length; i++){
-            filename = files[i];
-            suffix = filename.replace(name, '').replace('.js', '');
-            if (allowedFileSuffix.indexOf(suffix) > -1) {
-                from = path.resolve(fullPath, filename);
-                to = path.resolve(customKeystonePath, filename);
-                //fs.copyFileSync(from, to); // Copy file sync is corrupting files for some reason so using read and write methods below.
-                data = fs.readFileSync(from, 'utf-8');
-                fs.writeFileSync(to, data);
-                //console.log('Register-Custom-Type: Copied file', from, to)
-            }
-        }
+        // //loop through files and copy
+        // var files = fs.readdirSync(fullPath);
+        //
+        // // get files to copy
+        // for (var from, to, data, suffix, filename, i = 0; i < files.length; i++){
+        //     filename = files[i];
+        //     suffix = filename.replace(name, '').replace('.js', '');
+        //     if (allowedFileSuffix.indexOf(suffix) > -1) {
+        //         from = path.resolve(fullPath, filename);
+        //         to = path.resolve(customKeystonePath, filename);
+        //         //fs.copyFileSync(from, to); // Copy file sync is corrupting files for some reason so using read and write methods below.
+        //         data = fs.readFileSync(from, 'utf-8');
+        //         fs.writeFileSync(to, data);
+        //         //console.log('Register-Custom-Type: Copied file', from, to)
+        //     }
+        // }
 
 
         define();

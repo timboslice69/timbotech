@@ -6,7 +6,15 @@ var ClientType = new keystone.List('ClientType', {
     defaultSort: '-name',
     defaultColumns: 'name',
     track: true,
-    label: 'Client Types'
+    label: 'Client Types',
+    schema: {
+        toObject: {
+            virtuals: true
+        },
+        toJSON: {
+            virtuals: true
+        }
+    }
 });
 
 ClientType.add({
@@ -41,6 +49,9 @@ ClientType.add({
 ClientType.schema.virtual("permalink").get(function () {
     return "/clients/" + this.slug;
 });
+
+ClientType.schema.set('toObject', { virtuals: true });
+ClientType.schema.set('toJSON', { virtuals: true });
 
 ClientType.relationship({
     path: 'related_clients', // Local path name for relationship

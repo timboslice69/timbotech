@@ -13,6 +13,7 @@ var customTypes = require('./custom-types/register-custom-type');
 customTypes.register('CloudinaryImageExpress', 'custom-types/cloudinaryimageexpress', keystone);
 customTypes.register('CloudinaryImagesExpress', 'custom-types/cloudinaryimagesexpress', keystone);
 customTypes.register('CloudinaryVideo', 'custom-types/cloudinaryvideo', keystone);
+customTypes.register('MarkdownPlus', 'custom-types/markdownplus', keystone);
 
 keystone.init({
 	'name': 'Timbo Slice - Creative Technology',
@@ -39,9 +40,12 @@ keystone.init({
     'session store': 'mongo',
 	'auth': true,
 	'user model': 'User',
+
+    'wysiwyg cloudinary images': true
 });
 
 keystone.import('models');
+
 
 keystone.set('locals', {
 	_: require('lodash'),
@@ -50,10 +54,18 @@ keystone.set('locals', {
 	editable: keystone.content.editable,
 });
 keystone.set('routes', require('./routes'));
-
 keystone.set('cloudinary prefix', 'timbotech');
 keystone.set('cloudinary folders', true);
 keystone.set('cloudinary secure', true);
+//
+// keystone.set('nav', {
+//     articles: 'articles',
+//     clients: ['clients', 'client-types'],
+//     projects: 'projects',
+//     skills: ['skills', 'skillsets'],
+//     'work-methods': 'work-methods'
+// });
+
 
 
 //keystone.app = expressApp;

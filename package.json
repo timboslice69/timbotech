@@ -20,12 +20,29 @@
   "devDependencies": {},
   "scripts": {
     "start": "node keystone.js --scripts-prepend-node-path",
-    "compilecss": "node_modules/.bin/postcss style/site.css -d public --map --base --verbose",
-    "compilejs": "node_modules/.bin/uglifyjs --config-file uglify.config.json --output public/site.min.js -- js/site.js",
-    "compile": "npm run compilecss && npm run compilejs",
-    "watchcss": "node_modules/.bin/watch -p style/**/*.css -c \"npm run compilecss\"",
-    "watchjs": "node_modules/.bin/watch -p js/*.js -c \"npm run compilejs\"",
-    "nodemon": "nodemon --config nodemon.json",
-    "watch": "npm run watchjs & npm run watchcss & npm run nodemon"
-  }
+    "compile-css": "node_modules/.bin/postcss style/site.css -d public --map --base --verbose",
+    "compile-js": "node_modules/.bin/uglifyjs --config-file uglify.config.json --output public/site.min.js -- js/site.js",
+    "copy-custom-types": "cp -r -v -u custom-types/* node_modules/keystone/fields/types/",
+    "compile": "npm run compile-css && npm run compile-js",
+    "watch-custom-types": "node_modules/.bin/watch -p \"custom-types/**/*.js\" -c \"npm run copy-custom-types\"",
+    "watch-css": "node_modules/.bin/watch -p style/**/*.css -c \"npm run compile-css\"",
+    "watch-js": "node_modules/.bin/watch -p js/*.js -c \"npm run compile-js\"",
+    "nodemon": "nodemon",
+    "watch": "npm run watch-js & npm run watch-css & npm run watch-custom-types & npm run nodemon",
+    "watchdev": "npm run watch-js & npm run watch-css"
+  },
+  "nodemonConfig": {
+    "ext": "*js",
+    "watch": [
+      "models/*",
+      "routes/*"
+    ],
+    "verbose": true,
+    "ignore": [
+      "js/",
+      "node_modules/"
+    ],
+    "legacyWatch": true
+  },
+  "notes": "When working on custom fields, set env variable KEYSTONE_DEV to true and run the watch script. You will need to restart the server when making adding new custom-fields or making changes to keystone.js"
 }

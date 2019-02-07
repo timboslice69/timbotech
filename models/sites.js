@@ -22,8 +22,18 @@ Site.add({
         label: 'Site Logo',
     },
     introduction: {
-        type: Types.Markdown,
+        type: Types.MarkdownPlus,
         label: 'Introduction',
+        linkLists: [{
+                model: 'ClientType',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            },
+            {
+                model: 'WorkMethod',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            }]
     },
     copyright: {
         type: Types.Text,

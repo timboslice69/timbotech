@@ -7,6 +7,7 @@ var WorkMethod = new keystone.List('WorkMethod', {
     defaultColumns: 'name',
     track: true,
     label: 'Working Methods'
+
 });
 
 WorkMethod.add({
@@ -31,10 +32,23 @@ WorkMethod.add({
         type: Types.Markdown,
         label: 'Content',
     }
-});
+    // ,
+    // permalink: {
+    //     type: Types.Text,
+    //     label: 'Permalink',
+    //     note: 'Automatically generated',
+    //     canEdit: false
+    // }
+},
+    );
 
+// Cant use a virtual permalink because a long chain of
+// clusterfudges in keystone that wont renter virtuals in admin ui api calls
 WorkMethod.schema.virtual("permalink").get(function () {
     return "/working/" + this.slug;
 });
+
+WorkMethod.schema.set('toObject', { virtuals: true });
+WorkMethod.schema.set('toJSON', { virtuals: true });
 
 WorkMethod.register();
