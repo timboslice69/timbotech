@@ -28,8 +28,37 @@ Service.add({
         label: 'Introduction',
     },
     content: {
-        type: Types.Markdown,
+        type: Types.MarkdownPlus,
         label: 'Content',
+        linkLists: [{
+            model: 'ClientType',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'WorkMethod',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'Project',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'Skillset',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        }],
+        imageGallery: {
+            path: 'gallery',
+        }
+    },
+    gallery: {
+        type: Types.CloudinaryImagesExpress,
+        label: 'Gallery',
+        folder: 'service',
+        uploadPreset: "zfxzmcnc",
     }
 });
 

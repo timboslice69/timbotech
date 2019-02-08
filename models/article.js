@@ -35,6 +35,7 @@ Article.add({
         gallery: {
             type: Types.CloudinaryImagesExpress,
             folder: "articles",
+            uploadPreset: "zfxzmcnc",
             autoCleanup : true,
             label: "Photos & Images",
             note: "Upload the photos and images"

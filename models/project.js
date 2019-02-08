@@ -34,6 +34,7 @@ Project.add({
     ambition_image: {
         type: Types.CloudinaryImageExpress,
         folder: "projects",
+        uploadPreset: "zfxzmcnc",
         label: "Ambition Image"
     },
     process: {
@@ -43,6 +44,7 @@ Project.add({
     process_image: {
         type: Types.CloudinaryImageExpress,
         folder: "projects",
+        uploadPreset: "zfxzmcnc",
         label: "Process Image"
     },
     technology: {
@@ -52,6 +54,7 @@ Project.add({
     technology_image: {
         type: Types.CloudinaryImageExpress,
         folder: "projects",
+        uploadPreset: "zfxzmcnc",
         label: "Technology Image"
     },
     outcome: {
@@ -61,6 +64,7 @@ Project.add({
     outcome_image: {
         type: Types.CloudinaryImageExpress,
         folder: "projects",
+        uploadPreset: "zfxzmcnc",
         label: "Outcome Image"
     },
     lesson: {
@@ -70,11 +74,13 @@ Project.add({
     media: {
         video: {
             type: Types.CloudinaryVideo,
-            label: "Video"
+            label: "Video",
+            uploadPreset: "zfxzmcnc",
         },
         video_poster: {
             type: Types.CloudinaryImageExpress,
-            label: "Video Poster Image"
+            label: "Video Poster Image",
+            uploadPreset: "zfxzmcnc",
         }
     },
     related_client_type: {

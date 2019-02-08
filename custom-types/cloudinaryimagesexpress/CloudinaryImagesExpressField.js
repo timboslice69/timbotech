@@ -10,7 +10,6 @@ const SUPPORTED_REGEX = new RegExp(/^image\//g);
 
 const CLOUD_NAME = window.Keystone.cloudinary.cloud_name;
 const cloudinaryCloudName = CLOUD_NAME;
-const cloudinaryUploadPreset = "c2hkavne";
 
 let uploadInc = 1000;
 let xhr = new XMLHttpRequest();
@@ -112,7 +111,9 @@ const buildInitialState = (props) => ({
     uploadProgress: 0,
     loadingFiles: false,
     value: props.value,
-    fileInputDisabled: false
+    fileInputDisabled: false,
+    cloudinaryUploadPreset: props.uploadPreset,
+    cloudinaryUploadFolder: props.folder
 });
 
 const cloudinaryImagePropType = PropTypes.shape({
@@ -322,7 +323,8 @@ module.exports = Field.create({
                 }
         };
 
-        fd.append('upload_preset', cloudinaryUploadPreset);
+        fd.append('upload_preset', this.state.cloudinaryUploadPreset);
+        fd.append('folder', this.state.cloudinaryUploadFolder);
         fd.append('file', file);
         component.setState({uploading: true, uploadError: false, uploadPercent: 0});
         xhr.send(fd);

@@ -50,7 +50,10 @@ function cloudinaryimageexpress (list, path, options) {
 	this._underscoreMethods = ['format'];
 	this._fixedSize = 'full';
     this._defaultSize = 'full';
-	this._properties = ['select', 'selectPrefix', 'autoCleanup'];
+	this._properties = ['select', 'selectPrefix', 'autoCleanup', 'folder', 'uploadPreset'];
+
+    this.folder = ('folder' in options) ? options.folder : null;
+    this.uploadPreset = ('uploadPreset' in options) ? options.uploadPreset : null;
 
 	if (options.filenameAsPublicID) {
 		// Produces the same result as the legacy filenameAsPublicID option

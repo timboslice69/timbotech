@@ -50,9 +50,10 @@ function cloudinaryimagesexpress(list, path, options) {
     this._underscoreMethods = ['format'];
     this._fixedSize = 'full';
     this._defaultSize = 'full';
-    this._properties = ['select', 'selectPrefix', 'autoCleanup'];
+    this._properties = ['select', 'selectPrefix', 'autoCleanup', 'folder', 'uploadPreset'];
 
-    cloudinaryimagesexpress.super_.call(this, list, path, options);
+    this.folder = ('folder' in options) ? options.folder : null;
+    this.uploadPreset = ('uploadPreset' in options) ? options.uploadPreset : null;
 
     // validate cloudinary config
     if (!keystone.get('cloudinary config')) {
@@ -60,6 +61,8 @@ function cloudinaryimagesexpress(list, path, options) {
             + 'CloudinaryImages fields (' + list.key + '.' + this.path + ') require the "cloudinary config" option to be set.\n\n'
             + 'See http://keystonejs.com/docs/configuration/#services-cloudinary for more information.\n');
     }
+
+    cloudinaryimagesexpress.super_.call(this, list, path, options);
 }
 
 cloudinaryimagesexpress.properName = 'CloudinaryImagesExpress';
