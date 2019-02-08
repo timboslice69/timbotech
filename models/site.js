@@ -20,15 +20,17 @@ Site.add({
     logo: {
         type: Types.CloudinaryImageExpress,
         label: 'Site Logo',
+        folder: "site",
+        uploadPreset: "zfxzmcnc",
     },
     introduction: {
         type: Types.MarkdownPlus,
         label: 'Introduction',
         linkLists: [{
-                model: 'ClientType',
-                urlPath: 'permalink',
-                titlePath: 'name'
-            },
+            model: 'ClientType',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
             {
                 model: 'WorkMethod',
                 urlPath: 'permalink',

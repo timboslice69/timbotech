@@ -26,20 +26,45 @@ Article.add({
     introduction: {
         type: Types.Markdown,
         label: 'Introduction',
+        height: 300
     },
     content: {
-        type: Types.Markdown,
+        type: Types.MarkdownPlus,
         label: 'Content',
+        height: 800,
+        linkLists: [{
+            model: 'ClientType',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+            {
+                model: 'WorkMethod',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            },
+            {
+                model: 'Project',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            },
+            {
+                model: 'Skillset',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            }],
+        imageGallery: {
+            path: 'gallery',
+        }
+    },
+    gallery: {
+        type: Types.CloudinaryImagesExpress,
+        folder: "articles",
+        uploadPreset: "zfxzmcnc",
+        autoCleanup : true,
+        label: "Photos & Images",
+        note: "Upload the photos and images"
     },
     media: {
-        gallery: {
-            type: Types.CloudinaryImagesExpress,
-            folder: "articles",
-            uploadPreset: "zfxzmcnc",
-            autoCleanup : true,
-            label: "Photos & Images",
-            note: "Upload the photos and images"
-        },
         video: {
             type: Types.CloudinaryVideo,
             label: "Video",

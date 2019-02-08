@@ -26,30 +26,32 @@ Service.add({
     introduction: {
         type: Types.Markdown,
         label: 'Introduction',
+        height: 300,
     },
     content: {
         type: Types.MarkdownPlus,
         label: 'Content',
+        height: 500,
         linkLists: [{
             model: 'ClientType',
             urlPath: 'permalink',
             titlePath: 'name'
         },
-        {
-            model: 'WorkMethod',
-            urlPath: 'permalink',
-            titlePath: 'name'
-        },
-        {
-            model: 'Project',
-            urlPath: 'permalink',
-            titlePath: 'name'
-        },
-        {
-            model: 'Skillset',
-            urlPath: 'permalink',
-            titlePath: 'name'
-        }],
+            {
+                model: 'WorkMethod',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            },
+            {
+                model: 'Project',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            },
+            {
+                model: 'Skillset',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            }],
         imageGallery: {
             path: 'gallery',
         }

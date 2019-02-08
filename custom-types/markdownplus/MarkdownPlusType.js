@@ -20,11 +20,12 @@ function markdownplus (list, path, options) {
 	// .. https://www.npmjs.com/package/sanitize-html#what-are-the-default-options
 	this.sanitizeOptions = options.sanitizeOptions || {};
 
-	this.height = options.height || 90;
+	this.height = options.height || 200;
 	this.wysiwyg = ('wysiwyg' in options) ? options.wysiwyg : true;
     this.linkLists = ('linkLists' in options) ? options.linkLists : [];
+    this.imageGallery = ('imageGallery' in options) ? options.imageGallery : false;
 
-	this._properties = ['wysiwyg', 'height', 'toolbarOptions','linkLists'];
+	this._properties = ['wysiwyg', 'height', 'toolbarOptions','linkLists', 'imageGallery'];
 	markdownplus.super_.call(this, list, path, options);
 }
 markdownplus.properName = 'MarkdownPlus';

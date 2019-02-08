@@ -57,14 +57,13 @@ keystone.set('routes', require('./routes'));
 keystone.set('cloudinary prefix', 'timbotech');
 keystone.set('cloudinary folders', true);
 keystone.set('cloudinary secure', true);
-//
-// keystone.set('nav', {
-//     articles: 'articles',
-//     clients: ['clients', 'client-types'],
-//     projects: 'projects',
-//     skills: ['skills', 'skillsets'],
-//     'work-methods': 'work-methods'
-// });
+
+keystone.set('nav', {
+    content: ['articles', 'projects', 'services', 'work-methods' ],
+    clients: ['client-types', 'clients'],
+    skills: [ 'skillsets', 'skills'],
+	settings: ['sites']
+});
 
 
 

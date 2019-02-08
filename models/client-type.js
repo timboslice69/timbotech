@@ -50,8 +50,8 @@ ClientType.schema.virtual("permalink").get(function () {
     return "/clients/" + this.slug;
 });
 
-ClientType.schema.set('toObject', { virtuals: true });
-ClientType.schema.set('toJSON', { virtuals: true });
+ClientType.schema.set('toObject', {virtuals: true});
+ClientType.schema.set('toJSON', {virtuals: true});
 
 ClientType.relationship({
     path: 'related_clients', // Local path name for relationship

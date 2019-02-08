@@ -1,41 +1,41 @@
 import Field from '../Field';
-import { Fields } from 'FieldTypes';
+import {Fields} from 'FieldTypes';
 import React from 'react';
 import {FormInput, Modal, Button} from '../../../admin/client/App/elemental';
 import {listsByKey, listsByPath} from '../../../admin/client/utils/lists';
 import Select from 'react-select';
+import ImageThumbnail from '../../components/ImageThumbnail';
+import cloudinaryUrl from 'cloudinary-microurl';
 
-console.log(listsByKey, listsByPath);
 
+const CLOUD_NAME = window.Keystone.cloudinary.cloud_name;
 /**
  * TODO:
  * - Remove dependency on jQuery
  */
 
 // Scope jQuery and the bootstrap-markdown editor so it will mount
-var $ = require('jquery');
+let $ = require('jquery');
 require('./lib/bootstrap-markdown');
 
 // Append/remove ### surround the selection
 // Source: https://github.com/toopay/bootstrap-markdown/blob/master/js/bootstrap-markdown.js#L909
-var toggleHeading = function (e, level) {
-    var chunk;
-    var cursor;
-    var selected = e.getSelection();
-    var content = e.getContent();
-    var pointer;
-    var prevChar;
+let toggleHeading = function (e, level) {
+    let chunk,
+        cursor,
+        selected = e.getSelection(),
+        content = e.getContent(),
+        pointer,
+        prevChar;
 
     if (selected.length === 0) {
-        // Give extra word
         chunk = e.__localize('heading text');
     } else {
         chunk = selected.text + '\n';
     }
 
     // transform selection and set the cursor into chunked text
-    if ((pointer = level.length + 1, content.substr(selected.start - pointer, pointer) === level + ' ')
-        || (pointer = level.length, content.substr(selected.start - pointer, pointer) === level)) {
+    if ((pointer = level.length + 1, content.substr(selected.start - pointer, pointer) === level + ' ') || (pointer = level.length, content.substr(selected.start - pointer, pointer) === level)) {
         e.setSelection(selected.start - pointer, selected.end);
         e.replaceSelection(chunk);
         cursor = selected.start - pointer;
@@ -47,13 +47,12 @@ var toggleHeading = function (e, level) {
         e.replaceSelection(level + ' ' + chunk);
         cursor = selected.start + level.length + 1;
     }
-
     // Set the cursor
     e.setSelection(cursor, cursor + chunk.length);
 };
 
-var insertLink = function (e, url, text) {
-    var chunk,
+let insertLink = function (e, url, text) {
+    let chunk,
         selected = e.getSelection();
 
     if (selected.length > 0) {
@@ -66,13 +65,32 @@ var insertLink = function (e, url, text) {
     e.$element.focus();
     e.setSelection(selected.start + 1, selected.start + 1 + text.length);
 };
-var renderMarkdown = function (component) {
+
+let insertImage = function (e, url) {
+    let chunk,
+        cursor,
+        altText = 'alt text',
+        titleText = 'alt text',
+        selected = e.getSelection();
+
+    if (selected.length > 0) {
+        altText = titleText = selected.text;
+    }
+    chunk = '![' + altText + '](' + url + ' "'+titleText+'")';
+    e.replaceSelection(chunk);
+
+    // Set the cursor
+    cursor = selected.start + altText.length + url.length + 6;
+    e.$element.focus();
+    e.setSelection(cursor, cursor + titleText.length);
+};
+
+let renderMarkdown = function (component) {
     // dependsOn means that sometimes the component is mounted as a null, so account for that & noop
     if (!component.refs.markdownTextarea) {
         return;
     }
-
-    var options = {
+    let options = {
         autofocus: false,
         savable: false,
         resize: 'vertical',
@@ -90,57 +108,57 @@ var renderMarkdown = function (component) {
                         component.onInsertLink(e);
                     }
                 },
-                    {
-                        name: 'cmdImageLink',
-                        title: 'Link Item',
-                        icon: "mce-ico mce-i-image",
-                        callback: function (e) {
-                            component.onInsertImage(e);
-                        }
+                {
+                    name: 'cmdImageLink',
+                    title: 'Link Item',
+                    icon: "mce-ico mce-i-image",
+                    callback: function (e) {
+                        component.onInsertImage(e);
                     }
+                }
                 ]
             },
-            {
-                name: 'groupHeaders',
-                data: [
-                    {
-                        name: 'cmdH1',
-                        title: 'Heading 1',
-                        btnText: 'H1',
-                        callback: function (e) {
-                            toggleHeading(e, '#');
-                        },
-                    }, {
-                        name: 'cmdH2',
-                        title: 'Heading 2',
-                        btnText: 'H2',
-                        callback: function (e) {
-                            toggleHeading(e, '##');
-                        },
-                    }, {
-                        name: 'cmdH3',
-                        title: 'Heading 3',
-                        btnText: 'H3',
-                        callback: function (e) {
-                            toggleHeading(e, '###');
-                        },
-                    }, {
-                        name: 'cmdH4',
-                        title: 'Heading 4',
-                        btnText: 'H4',
-                        callback: function (e) {
-                            toggleHeading(e, '####');
-                        },
-                    }
-                ],
-            }]
+                {
+                    name: 'groupHeaders',
+                    data: [
+                        {
+                            name: 'cmdH1',
+                            title: 'Heading 1',
+                            btnText: 'H1',
+                            callback: function (e) {
+                                toggleHeading(e, '#');
+                            },
+                        }, {
+                            name: 'cmdH2',
+                            title: 'Heading 2',
+                            btnText: 'H2',
+                            callback: function (e) {
+                                toggleHeading(e, '##');
+                            },
+                        }, {
+                            name: 'cmdH3',
+                            title: 'Heading 3',
+                            btnText: 'H3',
+                            callback: function (e) {
+                                toggleHeading(e, '###');
+                            },
+                        }, {
+                            name: 'cmdH4',
+                            title: 'Heading 4',
+                            btnText: 'H4',
+                            callback: function (e) {
+                                toggleHeading(e, '####');
+                            },
+                        }
+                    ],
+                }]
         ],
         // Insert Header buttons into the toolbar
-        reorderButtonGroups: [ 'groupPlus', 'groupHeaders', 'groupFont',  'groupMisc', 'groupUtil']
+        reorderButtonGroups: ['groupPlus', 'groupHeaders', 'groupFont', 'groupMisc', 'groupUtil']
     };
 
     if (component.props.toolbarOptions.hiddenButtons) {
-        var hiddenButtons = (typeof component.props.toolbarOptions.hiddenButtons === 'string')
+        let hiddenButtons = (typeof component.props.toolbarOptions.hiddenButtons === 'string')
             ? component.props.toolbarOptions.hiddenButtons.split(',')
             : component.props.toolbarOptions.hiddenButtons;
 
@@ -162,12 +180,15 @@ var escapeHtmlForRender = function (html) {
 module.exports = Field.create({
     getInitialState(props) {
         return {
-            modalOpen: false,
+            imageModalOpen: false,
+            linkModalOpen: false,
             selectedLinkListKey: '',
             selectedLinkTargetValue: '',
             selectedLinkTargetLabel: '',
             linkListOptions: [],
-            linkLists: {}
+            linkLists: {},
+            selectedImageUrl: '',
+            imageGalleryPath: (this.props.imageGallery && this.props.imageGallery.path) ? this.props.imageGallery.path : false
         };
     },
     markdownController: null,
@@ -194,7 +215,6 @@ module.exports = Field.create({
                 })
             }
         }
-
         this.setState({
             linkListOptions: linkListOptions,
             linkLists: linkLists
@@ -202,7 +222,7 @@ module.exports = Field.create({
 
     },
 
-    loadLinkListOptions(inputValue, callback){
+    loadLinkListOptions(inputValue, callback) {
         let key = this.state.selectedLinkListKey,
             urlPath = this.state.linkLists[key].urlPath,
             titlePath = this.state.linkLists[key].titlePath;
@@ -215,14 +235,14 @@ module.exports = Field.create({
                 let items = result.results,
                     options = [];
 
-                for (let i=0; i<items.length; i++) {
+                for (let i = 0; i < items.length; i++) {
                     options.push({
                         value: items[i].fields[urlPath],
                         label: items[i].fields[titlePath]
                     });
                 }
 
-                callback(null, { options: options, complete: true });
+                callback(null, {options: options, complete: true});
             }
             else callback([]);
         });
@@ -230,14 +250,14 @@ module.exports = Field.create({
 
     onInsertLink(markdownController) {
         this.markdownController = markdownController;
-        this.setState({modalOpen: true});
+        this.setState({linkModalOpen: true});
     },
 
-    onModalCancel() {
+    onLinkModalCancel() {
         this.resetLinkListModal();
     },
 
-    onModalClose() {
+    onLinkModalClose() {
         this.resetLinkListModal();
     },
 
@@ -265,8 +285,46 @@ module.exports = Field.create({
             selectedLinkListKey: '',
             selectedLinkTargetValue: '',
             selectedLinkTargetLabel: '',
-            modalOpen: false
+            linkModalOpen: false
         });
+    },
+
+    loadGalleryImages(){
+        // Not sure if this is the best way to get live data of the object, but if its there why not use it?
+        const itemGlobal = window.Keystone.item;
+        return (itemGlobal.fields && itemGlobal.fields[this.state.imageGalleryPath]) ? itemGlobal.fields[this.state.imageGalleryPath] : [];
+    },
+
+    onInsertImageSubmit() {
+        if (!this.state.selectedImageUrl || this.state.selectedImageUrl === '') {
+            return;
+        }
+        insertImage(this.markdownController, this.state.selectedImageUrl);
+        this.resetInsertImageModal();
+    },
+
+    onInsertImage(markdownController) {
+        this.markdownController = markdownController;
+        this.setState({imageModalOpen: true});
+    },
+
+    onInsertImageModalCancel() {
+        this.resetInsertImageModal();
+    },
+
+    onInsertImageModalClose() {
+        this.resetInsertImageModal();
+    },
+
+    resetInsertImageModal() {
+        this.setState({
+            selectedImageUrl: '',
+            imageModalOpen: false
+        });
+    },
+
+    onImageSelect(){
+        console.log(arguments);
     },
 
     // override `shouldCollapse` to check the markdown field correctly
@@ -288,99 +346,89 @@ module.exports = Field.create({
             renderMarkdown(this);
         }
     },
+    getImageThumbnailSource(image, height = 200) {
+        if (!image) return "";
+        let public_id = image.public_id,
+            src = cloudinaryUrl(public_id, {
+                height: height,
+                cloud_name: CLOUD_NAME,
+                secure: false
+            });
+        return src.replace(/^(http)(s)?:/i, "");
+    },
 
-    showLinkTargetSelect(){
+    renderImageThumbnail(image) {
+        let width = image.width * (defaultThumbnailHeight / image.height);
+        let selected = this.state.selectedImageUrl === image.secure_url;
+        let handleClick = () => {
+            this.setState({selectedImageUrl: image.secure_url });
+        };
+        return (
+            <ImageThumbnail key={image.public_id} component="span" style={selected ? globalStyles.imageThumbnailSelected : globalStyles.imageThumbnail} onClick={handleClick}>
+                <img src={this.getImageThumbnailSource(image, defaultThumbnailHeight)}
+                     style={{height: defaultThumbnailHeight, background: '#ddd'}} height={defaultThumbnailHeight} width={width}/>
+            </ImageThumbnail>
+        );
+    },
+
+    renderImageThumbnails() {
+        const images = this.loadGalleryImages();
+        const imagePreviews = images.map((image) => {
+                return this.renderImageThumbnail(image)
+            }
+        );
+        return (imagePreviews);
+    },
+
+    showLinkTargetSelect() {
         return this.state.selectedLinkListKey !== '';
     },
 
-    renderLinkTargetSelect(selectStyle){
-         return (
-            <Select.Async
-                loadOptions={this.loadLinkListOptions}
-                onChange={this.onSelectLinkTargetChange}
-                value={this.state.selectedLinkTargetValue}
-                style={selectStyle}
-            />
+    renderLinkTargetSelect() {
+        return (
+            <Select.Async loadOptions={this.loadLinkListOptions} onChange={this.onSelectLinkTargetChange} value={this.state.selectedLinkTargetValue}/>
         )
     },
 
     renderLinkListModal() {
-        let labelStyle = {
-            display: "inline-block",
-            verticalAlign: "top",
-            width: "20%",
-            color: "#7F7F7F",
-            fontSize: "1rem",
-            fontWeight: "normal",
-            lineHeight: "2.3em",
-            marginBottom: "0",
-            paddingRight: "5px"
-        };
-
-        let selectStyle = {
-            display: "inline-block",
-            verticalAlign: "top",
-            width: "70%"
-        };
-
-        let containerStyle = {
-            padding: "1em 0"
-        };
-
-        let modalStyle = {
-            height: "80%"
-        };
-
         //todo: find a better workaround for dealing with modal overflow and height, subclass it perhaps
         return (
-            <div>
-                <style dangerouslySetInnerHTML={{__html: `
-                  div[data-screen-id="modal-dialog"] { overflow-y: visible; }
-                `}} />
-                <Modal.Dialog
-                    isOpen={this.state.modalOpen}
-                    onClose={this.onModalClose}
-                    backdropClosesModal
-                    style={modalStyle}
-                    className="modal-overflow-override"
-                >
-                    <Modal.Header
-                        text={'Insert a link'}
-                    />
-                    <Modal.Body>
-                        <div style={containerStyle}>
-                            <label style={labelStyle}>Link Type</label>
-                            <span style={selectStyle}>
-                                <Select
-                                    options={this.state.linkListOptions}
-                                    onChange={this.onSelectLinkListChange}
-                                    value={this.state.selectedLinkListKey}
-                                    style={selectStyle}
-                                />
-                            </span>
-                        </div>
-                        <div style={containerStyle}>
-                            <label style={labelStyle}>Link Target</label>
-                            <span style={selectStyle}>
-                                {this.showLinkTargetSelect() && this.renderLinkTargetSelect(selectStyle)}
-                            </span>
-                        </div>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button color="success" type="button" data-button-type="close" onClick={this.onLinkSubmit}>
-                            Insert
-                        </Button>
-                        <Button
-                            variant="link"
-                            color="cancel"
-                            data-button-type="cancel"
-                            onClick={this.onModalCancel}
-                        >
-                            Cancel
-                        </Button>
-                    </Modal.Footer>
-                </Modal.Dialog>
-            </div>
+            <Modal.Dialog isOpen={this.state.linkModalOpen} onClose={this.onLinkModalClose} backdropClosesModal className="modal-overflow-override">
+                <Modal.Header text={'Insert a link'}/>
+                <Modal.Body>
+                    <div style={globalStyles.container}>
+                        <label style={globalStyles.label}>Link Type</label>
+                        <span style={globalStyles.select}>
+                            <Select options={this.state.linkListOptions} onChange={this.onSelectLinkListChange} value={this.state.selectedLinkListKey}/>
+                        </span>
+                    </div>
+                    <div style={globalStyles.container}>
+                        <label style={globalStyles.label}>Link Target</label>
+                        <span style={globalStyles.select}>{this.showLinkTargetSelect() && this.renderLinkTargetSelect()}</span>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button color="success" type="button" data-button-type="close" onClick={this.onLinkSubmit}>Insert</Button>
+                    <Button variant="link" color="cancel" data-button-type="cancel" onClick={this.onLinkModalCancel}>Cancel</Button>
+                </Modal.Footer>
+            </Modal.Dialog>
+        );
+    },
+
+    renderInsertImageModal() {
+        return (
+            <Modal.Dialog isOpen={this.state.imageModalOpen} onClose={this.onInsertImageModalClose} backdropClosesModal>
+                <Modal.Header text={'Insert an Image'}/>
+                <Modal.Body>
+                    <div style={globalStyles.container}>
+                        {this.renderImageThumbnails()}
+                     </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button color="success" type="button" data-button-type="close" onClick={this.onInsertImageSubmit}>Insert</Button>
+                    <Button variant="link" color="cancel" data-button-type="cancel" onClick={this.onInsertImageModalCancel}>Cancel</Button>
+                </Modal.Footer>
+            </Modal.Dialog>
         );
     },
 
@@ -390,17 +438,18 @@ module.exports = Field.create({
             height: this.props.height,
         };
         const defaultValue = (this.props.value !== undefined && this.props.value.md !== undefined) ? this.props.value.md : '';
-
+        //todo: find a better workaround for dealing with modal overflow and height, subclass it perhaps
         return (
             <div>
+                <style dangerouslySetInnerHTML={{__html:
+                        `
+                        div[data-screen-id="modal-dialog"] { overflow-y: visible; }
+                        .md-editor__preview img {max-width:100%;height:auto;}
+                        `
+                }}/>
+                {this.renderInsertImageModal()}
                 {this.renderLinkListModal()}
-                <textarea
-                    className="md-editor__input code"
-                    defaultValue={defaultValue}
-                    name={this.getInputName(this.props.paths.md)}
-                    ref="markdownTextarea"
-                    style={styles}
-                />
+                <textarea className="md-editor__input code" defaultValue={defaultValue} name={this.getInputName(this.props.paths.md)} ref="markdownTextarea" style={styles}/>
             </div>
         );
     },
@@ -413,12 +462,51 @@ module.exports = Field.create({
             : '';
 
         return (
-            <FormInput
-                dangerouslySetInnerHTML={{__html: innerHtml}}
-                multiline
-                noedit
-            />
+            <FormInput dangerouslySetInnerHTML={{__html: innerHtml}} multiline noedit/>
         );
-    }
-    ,
+    },
 });
+
+
+let defaultThumbnailHeight = 150;
+
+const globalStyles = {
+    imageThumbnail: {
+        position: 'relative',
+        display: 'inline-block',
+        verticalAlign: 'top',
+        margin: '0 10px 10px 0',
+        cursor: "pointer"
+    },
+    imageThumbnailSelected: {
+        position: 'relative',
+        display: 'inline-block',
+        verticalAlign: 'top',
+        margin: '0 10px 10px 0',
+        borderColor: "#1385e5",
+        backgroundColor: '#1385e5'
+    },
+    imageThumbnailImage: {
+        height: defaultThumbnailHeight + 'px',
+        width: 'auto'
+    },
+    label: {
+        display: "inline-block",
+        verticalAlign: "top",
+        width: "20%",
+        color: "#7F7F7F",
+        fontSize: "1rem",
+        fontWeight: "normal",
+        lineHeight: "2.3em",
+        marginBottom: "0",
+        paddingRight: "5px"
+    },
+    select: {
+        display: "inline-block",
+        verticalAlign: "top",
+        width: "70%"
+    },
+    container: {
+        padding: "1em 0"
+    }
+};

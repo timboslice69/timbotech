@@ -355,7 +355,7 @@ module.exports = Field.create({
     renderImageThumbnail(image) {
         let width = image.width * (defaultThumbnailHeight / image.height);
         return (
-            <ImageThumbnail component="span" style={globalStyles.imageThumbnail}>
+            <ImageThumbnail key={image.public_id} component="span" style={globalStyles.imageThumbnail}>
                 <img src={this.getImageThumbnailSource(image, defaultThumbnailHeight)}
                      style={{height: defaultThumbnailHeight, background: '#ddd'}} height={defaultThumbnailHeight} width={width}/>
                 {this.renderImageDeleteButton(image)}
