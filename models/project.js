@@ -23,6 +23,16 @@ Project.add({
         index: true,
         label: 'Name'
     },
+    summary: {
+        type: Types.Text,
+        label: 'Summary'
+    },
+    hero_image: {
+        type: Types.CloudinaryImageExpress,
+        folder: "projects",
+        uploadPreset: "zfxzmcnc",
+        label: "Hero Image"
+    },
     introduction: {
         type: Types.Markdown,
         label: 'Introduction',

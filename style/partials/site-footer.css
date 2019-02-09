@@ -1,0 +1,149 @@
+#site-footer {
+    --padding-top: 50px;
+    --padding-left-right: 50px;
+    box-sizing: border-box;
+    position: relative;
+    background-color: var(--color-background-highlight);
+    font-size: var(--font-size-small);
+    font-weight: lighter;
+    line-height: var(--line-height-small);
+    padding-top: var(--padding-top);
+    padding-right: var(--padding-left-right);
+    padding-left: var(--padding-left-right);
+}
+
+#site-footer .inner {
+    font-size: 0;
+}
+
+#site-footer .inner > * {
+    display: inline-block;
+    vertical-align: top;
+    font-size: var(--font-size-small);
+    width: 25%;
+}
+
+#site-footer a {
+    color: var(--color-text-normal);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(45, 45, 45, .05);
+}
+
+#site-footer a:hover {
+    border-color: var(--color-text-normal);
+}
+
+#site-footer .site {
+}
+
+#site-footer .site a {
+    display: block;
+    font-weight: bold;
+    width: 70px;
+    border: none;
+}
+
+#site-footer .site p {
+    margin: .5em 0 0 0;
+    font-size: .9em;
+    line-height: 1.3em;
+}
+
+#site-footer ul {
+    box-sizing: border-box;
+    text-transform: lowercase;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    line-height: 1.6em;
+}
+
+#site-footer ul.client-types,
+#site-footer ul.content {
+}
+
+#site-footer ul.client-types a:before,
+#site-footer ul.content a:before {
+    content: ":"
+}
+
+#site-footer .contact {
+    top: var(--padding-top);
+    right: var(--padding-left-right);
+}
+
+#site-footer .contact > * {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: .2em;
+}
+
+#site-footer .contact ul {
+    text-align: right;
+    margin: 0 5px 0 0;
+}
+
+#site-footer .qr {
+    height: 60px;
+    width: auto;
+}
+
+#site-footer .copyright {
+    display: block;
+    padding: 35px 0 10px 0;
+    text-align: center;
+    font-size: .8em;
+}
+
+#site-footer:after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: rgba(202, 202, 202, 1);
+}
+
+/* small screens */
+@media screen and (max-width: 768px) {
+
+}
+
+/* mobile screens */
+@media screen and (max-width: 520px), (orientation: landscape) and (max-width: 812px) {
+    #site-footer .inner > * {
+        width: 100%;
+        padding-bottom: 25px;
+    }
+
+    #site-footer .inner > ul {
+        width: 50%;
+    }
+
+    #site-footer .inner .site {
+        text-align: center;
+    }
+
+    #site-footer .inner .site a {
+        width: auto;
+    }
+
+    #site-footer .inner ul.content {
+        text-align: right;
+    }
+
+    #site-footer .inner .contact {
+        padding-bottom: 0;
+    }
+
+    #site-footer .inner .contact > * {
+        display: block;
+        text-align: center;
+    }
+
+    #site-footer .inner .contact .qr  {
+        margin: 10px auto 0 auto;
+        height: 100px;
+    }
+}

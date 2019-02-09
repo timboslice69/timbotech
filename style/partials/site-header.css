@@ -1,0 +1,16 @@
+#site-header {
+    z-index: 9999;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em 50px;
+    font-size: var(--font-size-small);
+}
+
+#site-header .site-name {
+    font-size: inherit;
+}
+
+#site-header .site-logo {
+    display: none;
+}

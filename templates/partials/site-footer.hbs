@@ -1,5 +1,34 @@
 <footer id="site-footer">
+    <div class="inner inner-width-limit">
+        <div class="site">
+            <a href="/">{{site.name}}</a>
+            <p>{{site.tagline}}</p>
+        </div>
+
+        <ul class="client-types">
+            {{#each clientTypes}}
+               <li><a href="{{permalink}}">{{name}}</a></li>
+            {{/each}}
+        </ul>
+
+        <ul class="content">
+            <li><a href="/articles">Articles</a></li>
+            <li><a href="/clients">Clients</a></li>
+            <li><a href="/projects">Projects</a></li>
+            <li><a href="/services">Services</a></li>
+        </ul>
+
+        <div class="contact">
+            <ul>
+                <li><a href="mailto:{{site.contact.email}}">{{site.contact.email}}</a></li>
+                <li><a href="{{site.contact.linkedin}}">LinkedIn</a></li>
+            </ul>
+            <img class="qr" width="100" src="{{site.contact.wechat_qr.secure_url}}">
+        </div>
+    </div>
+
     <div class="copyright">
         &copy; {{{site.copyright}}}
     </div>
+
 </footer>

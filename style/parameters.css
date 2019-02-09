@@ -13,8 +13,11 @@
     --color-photo-background: rgb(245,245,245);
 
     --font-size-large: 23px;
+    --line-height-large: 36px;
     --font-size-normal: 18px;
+    --line-height-normal: 24px;
     --font-size-small: 12px;
+    --line-height-small: 17px;
 
     --color-background-normal: rgba(255,255,255,1);
     --color-background-highlight: rgba(185,185,185,1);
@@ -23,12 +26,21 @@
     --color-text-highlight: rgba(13,13,13,1);
     --color-text-warning: rgba(200,75,75,1);
 
-    --color-link-normal: rgba(33,67,207,1);
+    --color-link-normal: rgba(45,45,45,1);
+    --color-link-normal-underline: rgba(12,0,206,1);
+    --color-link-hover-underline: rgba(12,0,206,1);
+    --color-link-visited: rgba(45,45,45,1);
+    --color-link-visited-underline: rgba(145,60,204,1);
+
 
     --text-shadow-default: 0 1px 0px rgba(0,0,0,.5);
     --text-shadow-light: 0 1px 0px rgba(0,0,0,.35);
 
     --box-shadow-upper: 0 -2px 2px rgba(0,0,0,.05);
+
+    --transition-delay: 0s;
+    --transition-duration: .3s;
+    --transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
 }
 
 

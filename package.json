@@ -25,8 +25,8 @@
     "copy-custom-types": "cp -r -v -u custom-types/* node_modules/keystone/fields/types/",
     "compile": "npm run compile-css && npm run compile-js",
     "watch-custom-types": "node_modules/.bin/watch -p \"custom-types/**/*.js\" -c \"npm run copy-custom-types\"",
-    "watch-css": "node_modules/.bin/watch -p style/**/*.css -c \"npm run compile-css\"",
-    "watch-js": "node_modules/.bin/watch -p js/*.js -c \"npm run compile-js\"",
+    "watch-css": "node_modules/.bin/watch -p \"style/**/*.css\" -c \"npm run compile-css\"",
+    "watch-js": "node_modules/.bin/watch -p \"js/*.js\" -c \"npm run compile-js\"",
     "nodemon": "nodemon",
     "watch": "npm run watch-js & npm run watch-css & npm run watch-custom-types & npm run nodemon",
     "watchdev": "npm run watch-js & npm run watch-css"

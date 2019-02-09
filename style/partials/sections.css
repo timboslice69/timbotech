@@ -1,0 +1,112 @@
+section {
+    box-sizing: border-box;
+    padding-top: 50px;
+    overflow-x: hidden;
+}
+
+section.md-content {
+    font-size: var(--font-size-normal);
+    line-height: var(--line-height-normal);
+}
+
+section.section-introduction {
+    background-color: var(--color-background-highlight);
+    font-size: var(--font-size-large);
+    line-height: var(--line-height-large);
+    padding-bottom: 50px;
+}
+
+section.section-introduction .inner {
+}
+
+section.section-introduction p {
+    margin: 0;
+}
+
+section.section-introduction p a:link {
+    color: inherit;
+    text-decoration: none;
+    transition-property: color;
+    transition-delay: var(--transition-delay);
+    transition-duration: var(--transition-duration);
+    transition-timing-function: var(--transition-timing-function);
+    position: relative;
+    overflow: visible;
+}
+
+section.section-introduction p a:link:before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 1px;
+    height: 2px;
+    width: 93%;
+    opacity: 0.2;
+    transform: translate(-50%, 0);
+    background: var(--color-link-normal-underline);
+    text-decoration: none;
+    transition-property: padding, opacity;
+    transition-delay: var(--transition-delay);
+    transition-duration: var(--transition-duration);
+    transition-timing-function: var(--transition-timing-function);
+}
+
+section.section-introduction p a:visited {
+    color: var(--color-link-visited);
+}
+
+section.section-introduction p a:visited:hover {
+    border-color: var(--color-link-visited-underline);
+
+}
+
+section.section-introduction p a:hover {
+    border-color: var(--color-link-hover-underline);
+}
+
+section.section-introduction p a:hover:before {
+    padding: 0 8px;
+    opacity: 0.5;
+    background: var(--color-link-hover-underline);
+}
+
+/* large screens */
+@media screen and (min-width: 1440px) {
+
+}
+
+/* medium screens */
+@media screen and (max-width: 1124px) {
+    section {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
+
+/* medium screens */
+@media screen and (max-width: 1024px) {
+    .section-projects {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+/* small screens */
+@media screen and (max-width: 768px) {
+
+}
+
+/* mobile screens */
+@media screen and (max-width: 520px), (orientation: landscape) and (max-width: 812px) {
+    section {
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    section.section-introduction {
+        padding-top: 50px;
+        padding-bottom: 30px;
+    }
+
+}

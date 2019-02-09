@@ -4,5 +4,7 @@
 
 @import "partials/site-header.css";
 @import "partials/site-footer.css";
+@import "partials/sections.css";
+@import "partials/projects-grid.css";
 
 @import "views/index.css";

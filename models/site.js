@@ -17,6 +17,10 @@ Site.add({
         index: true,
         label: 'Site Name'
     },
+    tagline: {
+        type: Types.Text,
+        label: 'Tag Line'
+    },
     logo: {
         type: Types.CloudinaryImageExpress,
         label: 'Site Logo',
@@ -37,9 +41,63 @@ Site.add({
                 titlePath: 'name'
             }]
     },
+    content: {
+        type: Types.MarkdownPlus,
+        label: 'Content',
+        linkLists: [{
+            model: 'Article',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'ClientType',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'Project',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'WorkMethod',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'Service',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+        {
+            model: 'Skillset',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        }]
+    },
     copyright: {
         type: Types.Text,
         label: 'Copyright notice'
+    },
+    contact: {
+        email:  {
+            type: Types.Email,
+            label: 'Email Address'
+        },
+        wechat:  {
+            type: Types.Text,
+            label: 'WeChat'
+        },
+        wechat_qr: {
+            type: Types.CloudinaryImageExpress,
+            label: 'WeChat QR Code',
+            folder: "site",
+            uploadPreset: "zfxzmcnc",
+        },
+        linkedin:  {
+            type: Types.Text,
+            label: 'LinkedIn'
+        },
     },
     seo: {
         name: {

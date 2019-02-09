@@ -19,7 +19,8 @@ keystone.pre('routes', parallel([
     middleware.initErrorHandlers,
     middleware.initMeta,
     middleware.initLocals,
-    middleware.initAssets
+    middleware.initAssets,
+    middleware.initGlobals,
 ]));
 
 // Load Routes

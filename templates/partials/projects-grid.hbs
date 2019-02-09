@@ -1,0 +1,10 @@
+<div class="projects-grid">
+    {{#each projects}}
+        <div class="project">
+            <div class="inner">
+                <a href="{{permalink}}"><span class="summary">{{summary}}</span></a>
+                {{>picture photo=hero_image}}
+            </div>
+        </div>
+    {{/each}}
+</div>

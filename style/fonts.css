@@ -4,6 +4,11 @@ body {
     color: var(--color-normal);
 }
 
+::selection {
+    background: rgba(12,0,206,.6);
+    color: rgba(255,255,255,.8)
+}
+
 h1 {
     font-size: var(--font-size-heading-one);
     color: var(--color-strong);
@@ -39,10 +44,27 @@ h2 a:visited {
 }
 
 a {
-    font-size: var(--font-size-link);
+    color: var(--color-link-normal);
+    text-decoration: underline;
+    text-transform: lowercase;
 }
 
-p {
-    font-size: var(--font-size-normal);
+a:link {
+    color: rgba(12, 0, 206, 1);
 }
 
+a:link:before {
+    content: ":";
+}
+
+a:visited {
+    color: var(--color-link-visited);
+}
+
+p a:visited:hover {
+    border-color: var(--color-link-visited-underline);
+}
+
+p a:hover {
+    border-color: var(--color-link-hover-underline);
+}

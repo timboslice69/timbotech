@@ -1,4 +1,5 @@
 var keystone = require('keystone'),
+    ClientType = keystone.list('ClientType'),
     Site = keystone.list('Site');
 
 /**
@@ -70,6 +71,33 @@ exports.initLocals = function (req, res, next) {
     });
 
 };
+
+/**
+ Initialises the standard view locals.
+ Include anything that should be initialised before route controllers are executed.
+ */
+exports.initGlobals = function (req, res, next) {
+    var locals = res.locals;
+
+    function getClientTypes() {
+        return new Promise(function (resolve, reject) {
+            ClientType.model
+                .find({status: 'published'})
+                .select('name permalink')
+                .exec()
+                .then(resolve)
+                .catch(reject);
+        });
+    }
+
+    getClientTypes().then(function(clientTypes){
+        locals.clientTypes = clientTypes;
+        next();
+    });
+
+
+};
+
 
 /**
  * Initialise Assets (scripts and stylesheets)

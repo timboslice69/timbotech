@@ -8,10 +8,32 @@ body {
     min-width: 320px;
     padding: 0;
     margin: 0;
+    background-color: var(--color-background-highlight);
+}
+
+main {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 0;
+    background-color: var(--color-background-normal);
 }
 
 .hide {
     display: none;
+}
+
+.inner {
+    box-sizing: border-box;
+    position: relative;
+}
+
+.inner-width-limit {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+.md-content p {
+    margin-top: 0;
 }
 
 /* large screens */
@@ -21,6 +43,10 @@ body {
 
 /* mobile screens */
 @media screen and (max-width: 520px), (orientation: landscape) and (max-width: 812px) {
+
+    main {
+        padding: 0;
+    }
 
 }
 
