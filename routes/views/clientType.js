@@ -1,5 +1,5 @@
 let keystone = require('keystone'),
-    Project = keystone.list('Project');
+    ClientType = keystone.list('ClientType');
 
 exports = module.exports = function (req, res) {
 
@@ -7,11 +7,11 @@ exports = module.exports = function (req, res) {
         locals = res.locals;
 
 
-    function getProjects() {
+    function getClientType(slug) {
         return new Promise(function (resolve, reject) {
-            Project.model
-                .find({status: 'published'})
-                .select('name permalink summary hero_image slug')
+            ClientType.model
+                .findOne({slug: slug})
+                .populate('related_skillsets related_clients')
                 .exec()
                 .then(resolve)
                 .catch(reject);
@@ -20,12 +20,14 @@ exports = module.exports = function (req, res) {
 
     view.on('init', function (next) {
 
-        getProjects().then(function(results){
-            locals.projects = results;
+        let slug = req.params.slug;
+
+        getClientType(slug).then(function(result){
+            locals.clientType = result;
             next();
         });
 
     });
 
-    view.render('views/index');
+    view.render('views/client-type');
 };

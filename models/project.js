@@ -116,6 +116,12 @@ Project.add({
         ref: "Service",
         many: true,
         label: "Services"
+    },
+    related_projects: {
+        type: Types.Relationship,
+        ref: "Project",
+        many: true,
+        label: "Related Projects"
     }
 });
 

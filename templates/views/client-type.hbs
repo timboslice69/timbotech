@@ -1,0 +1,24 @@
+{{#>introduction}}
+    <h1>Clients:{{clientType.name}}</h1>
+    {{{clientType.introduction.html}}}
+{{/introduction}}
+{{#>main}}
+    <article class="clientType">
+        <section class="content">
+            {{{clientType.content.html}}}
+        </section>
+        {{#if clientType.related_clients}}
+            <section class="related-clients">
+                {{#each clientType.related_clients}}
+                    <h2>{{name}}</h2>
+                    <p>{{summary}}</p>
+                {{/each}}
+            </section>
+        {{/if}}
+        {{#if clientType.related_clients}}
+            <section class="related-projects">
+                {{>projects-grid projects=related_projects}}
+            </section>
+        {{/if}}
+    </article>
+{{/main}}

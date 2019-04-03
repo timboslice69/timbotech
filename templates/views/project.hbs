@@ -1,0 +1,71 @@
+{{#>introduction}}
+    <h1>Project:{{project.name}}</h1>
+    {{{project.introduction.html}}}
+    <nav>
+        {{#if project.ambition}}
+            <a href="#ambition">Ambition</a>
+        {{/if}}
+        {{#if project.process}}
+            <a href="#process">Process</a>
+        {{/if}}
+        {{#if project.technology}}
+            <a href="#technology">Technology</a>
+        {{/if}}
+        {{#if project.outcome}}
+            <a href="#outcome">Outcome</a>
+        {{/if}}
+        {{#if project.lesson}}
+            <a href="#lesson">lesson</a>
+        {{/if}}
+    </nav>
+{{/introduction}}
+{{#>main}}
+    <article class="project">
+        <section class="hero">
+            {{>picture photo=hero_image}}
+        </section>
+        <section class="introduction">
+            {{project.introduction.html}}
+        </section>
+        {{#if project.ambition}}
+            <section class="ambition">
+                {{>picture photo=ambition_image}}
+                <a name="ambition" class="title">ambition</a>
+                {{{project.ambition.html}}}
+            </section>
+        {{/if}}
+        {{#if project.process}}
+            <section class="process">
+                {{>picture photo=process_image}}
+                <a name="ambition" class="title">process</a>
+                {{{project.process.html}}}
+            </section>
+        {{/if}}
+        {{#if project.technology}}
+            <section class="technology">
+                {{>picture photo=technology_image}}
+                <a name="ambition" class="title">technology</a>
+                {{{project.technology.html}}}
+            </section>
+        {{/if}}
+        {{#if project.outcome}}
+            <section class="outcome">
+                {{>picture photo=outcome_image}}
+                <a name="ambition" class="title">outcome</a>
+                {{{project.outcome.html}}}
+            </section>
+        {{/if}}
+        {{#if project.lesson}}
+            <section class="lesson">
+                {{>picture photo=outcome_image}}
+                <a name="ambition" class="title">lesson</a>
+                {{{project.lesson.html}}}
+            </section>
+        {{/if}}
+        {{#if project.related_projects}}
+            <section class="related-projects">
+                {{>projects-grid projects=related_projects}}
+            </section>
+        {{/if}}
+    </article>
+{{/main}}

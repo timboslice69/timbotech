@@ -37,6 +37,9 @@ exports = module.exports = function(app) {
 
     // Views
     app.get('/', routes.views.index);
+    app.get('/projects/:slug', routes.views.project);
+    app.get('/client-types/:slug', routes.views.clientType);
+    app.get('/work-method/:slug', routes.views.workMethod);
 
     // API
     app.use('/api', cache({private: true, ttl:  3600}));

@@ -1,0 +1,39 @@
+version: '3.1'
+
+services:
+
+  mongo_dev:
+    image: mongo
+    env_file: docker/development.env
+    volumes:
+      - mongo_dev_data:/data/db
+    restart: always
+
+
+  mongo_express:
+    image: mongo-express
+    env_file: docker/development.env
+    restart: always
+    ports:
+      - 8081:8081
+
+
+  node:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args:
+        - NODE_ENV=development
+    env_file: docker/development.env
+    depends_on:
+      - mongo_dev
+    restart: always
+    ports:
+      - "8888:8000"
+    links:
+      - mongo_dev
+    volumes:
+      - ./:/usr/src/app
+
+volumes:
+    mongo_dev_data: {}

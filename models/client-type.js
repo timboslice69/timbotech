@@ -36,8 +36,40 @@ ClientType.add({
         label: 'Introduction',
     },
     content: {
-        type: Types.Markdown,
+        type: Types.MarkdownPlus,
         label: 'Content',
+        height: 800,
+        linkLists: [{
+            model: 'ClientType',
+            urlPath: 'permalink',
+            titlePath: 'name'
+        },
+            {
+                model: 'WorkMethod',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            },
+            {
+                model: 'Project',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            },
+            {
+                model: 'Skillset',
+                urlPath: 'permalink',
+                titlePath: 'name'
+            }],
+        imageGallery: {
+            path: 'gallery',
+        }
+    },
+    gallery: {
+        type: Types.CloudinaryImagesExpress,
+        folder: "articles",
+        uploadPreset: "zfxzmcnc",
+        autoCleanup : true,
+        label: "Photos & Images",
+        note: "Upload the photos and images"
     },
     related_skillsets: {
         type: Types.Relationship,
@@ -47,7 +79,7 @@ ClientType.add({
 });
 
 ClientType.schema.virtual("permalink").get(function () {
-    return "/clients/" + this.slug;
+    return "/client-types/" + this.slug;
 });
 
 ClientType.schema.set('toObject', {virtuals: true});

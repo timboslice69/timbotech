@@ -1,5 +1,5 @@
 let keystone = require('keystone'),
-    Project = keystone.list('Project');
+    WorkMethod = keystone.list('WorkMethod');
 
 exports = module.exports = function (req, res) {
 
@@ -7,11 +7,11 @@ exports = module.exports = function (req, res) {
         locals = res.locals;
 
 
-    function getProjects() {
+    function getWorkMethod(slug) {
         return new Promise(function (resolve, reject) {
-            Project.model
-                .find({status: 'published'})
-                .select('name permalink summary hero_image slug')
+            WorkMethod.model
+                .findOne({slug: slug})
+                .populate('')
                 .exec()
                 .then(resolve)
                 .catch(reject);
@@ -20,12 +20,14 @@ exports = module.exports = function (req, res) {
 
     view.on('init', function (next) {
 
-        getProjects().then(function(results){
-            locals.projects = results;
+        let slug = req.params.slug;
+
+        getWorkMethod(slug).then(function(result){
+            locals.workMethod = result;
             next();
         });
 
     });
 
-    view.render('views/index');
+    view.render('views/work-method');
 };

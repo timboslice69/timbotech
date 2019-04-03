@@ -7,7 +7,6 @@ var WorkMethod = new keystone.List('WorkMethod', {
     defaultColumns: 'name',
     track: true,
     label: 'Working Methods'
-
 });
 
 WorkMethod.add({

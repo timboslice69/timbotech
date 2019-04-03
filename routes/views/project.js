@@ -7,11 +7,11 @@ exports = module.exports = function (req, res) {
         locals = res.locals;
 
 
-    function getProjects() {
+    function getProject(slug) {
         return new Promise(function (resolve, reject) {
             Project.model
-                .find({status: 'published'})
-                .select('name permalink summary hero_image slug')
+                .findOne({slug: slug})
+                .populate('related_client_type related_client related_skillsets related_services')
                 .exec()
                 .then(resolve)
                 .catch(reject);
@@ -20,12 +20,14 @@ exports = module.exports = function (req, res) {
 
     view.on('init', function (next) {
 
-        getProjects().then(function(results){
-            locals.projects = results;
+        let slug = req.params.slug;
+
+        getProject(slug).then(function(result){
+            locals.project = result;
             next();
         });
 
     });
 
-    view.render('views/index');
+    view.render('views/project');
 };

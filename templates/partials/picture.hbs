@@ -1,3 +1,4 @@
+{{#if photo}}
 <picture class="{{class}}">
     <!-- Small Screen Landscape Image -->
     <source media="(max-width: 520px)" srcset="{{cloudinaryUrl photo width=520}} 1x, {{cloudinaryUrl photo width=1040}} 2x, {{cloudinaryUrl photo width=1560}} 3x">
@@ -6,3 +7,4 @@
     <!-- Default Image-->
     <img srcset="{{cloudinaryUrl photo width=720}} 1x, {{cloudinaryUrl photo width=1480}} 2x, {{cloudinaryUrl photo width=2160}} 3x">
 </picture>
+{{/if}}

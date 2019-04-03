@@ -23,6 +23,10 @@ Client.add({
         index: true,
         label: 'Name'
     },
+    summary: {
+        type: Types.Text,
+        label: 'Summary'
+    },
     client_type: {
         type: Types.Relationship,
         ref: "ClientType",
